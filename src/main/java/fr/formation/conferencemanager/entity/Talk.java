@@ -5,23 +5,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.util.List;
-
-
+import java.time.LocalDateTime;
 @Entity
-@Table(name = "conferences")
+@Table(name = "talks")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Conference {
+public class Talk {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private String location;
-    @OneToMany
-    private List<Talk> talks;
+    private String title;
+    private String description;
+    private LocalDateTime startTime;
+//    private LocalDateTime endDate;
+    @ManyToOne
+    private Conference conference;
+    @ManyToOne
+    private Speaker speaker;
 }
