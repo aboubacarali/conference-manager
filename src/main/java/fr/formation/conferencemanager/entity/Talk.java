@@ -1,5 +1,6 @@
 package fr.formation.conferencemanager.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,5 +23,6 @@ public class Talk {
     @ManyToOne
     private Conference conference;
     @ManyToOne
+    @JsonBackReference
     private Speaker speaker;
 }

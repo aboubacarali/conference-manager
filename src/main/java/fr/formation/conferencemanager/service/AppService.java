@@ -24,6 +24,8 @@ public class AppService {
             throw new RuntimeException("Speaker or talk doesn't exist");
         }
         speakerToUpdate.get().getTalks().add(talkToAdd.get());
+        talkToAdd.get().setSpeaker(speakerToUpdate.get());
+        talkRepository.save(talkToAdd.get());
         return speakerRepository.save(speakerToUpdate.get());
     }
 }

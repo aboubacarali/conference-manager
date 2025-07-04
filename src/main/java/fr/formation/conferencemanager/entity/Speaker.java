@@ -1,5 +1,6 @@
 package fr.formation.conferencemanager.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +20,8 @@ public class Speaker {
     private String firstName;
     private String lastName;
     private String bio;
-    @OneToMany
+//    @OneToMany
+    @OneToMany(mappedBy = "speaker")
+    @JsonManagedReference
     private List<Talk> talks;
 }
