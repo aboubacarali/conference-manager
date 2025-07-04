@@ -41,4 +41,12 @@ public class AppService {
         talkRepository.save(talkToAdd.get());
         return conferenceRepository.save(conferenceToUpdate.get());
     }
+
+    public Talk viewTalk(Long talkId) {
+        Optional<Talk> talkFound = talkRepository.findById(talkId);
+        if (talkFound.isEmpty()) {
+            throw new RuntimeException("Talk not found");
+        }
+        return talkFound.get();
+    }
 }
