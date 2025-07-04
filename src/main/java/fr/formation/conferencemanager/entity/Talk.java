@@ -19,7 +19,6 @@ public class Talk {
     private String title;
     private String description;
     private LocalDateTime startTime;
-//    private LocalDateTime endDate;
     @ManyToOne
     @JsonBackReference
     private Conference conference;
