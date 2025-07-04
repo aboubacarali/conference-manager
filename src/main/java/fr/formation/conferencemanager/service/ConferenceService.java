@@ -1,5 +1,6 @@
 package fr.formation.conferencemanager.service;
 
+import fr.formation.conferencemanager.dto.ConferenceDetailDto;
 import fr.formation.conferencemanager.dto.ConferenceSummaryDto;
 import fr.formation.conferencemanager.dto.TalkSummaryDto;
 import fr.formation.conferencemanager.entity.Conference;
@@ -34,5 +35,23 @@ public class ConferenceService {
                                 ))
                                 .collect(Collectors.toList())
                         )).collect(Collectors.toList());
+    }
+
+    public ConferenceDetailDto getConference(Long id) {
+        Conference conference = conferenceRepository.findById(id).orElse(null);
+        return new ConferenceDetailDto(
+                conference.getName(),
+                conference.getStartDate(),
+                conference.getEndDate(),
+                conference.getLocation(),
+                conference.getTalks()
+                        .stream()
+                        .map(talk -> new TalkSummaryDto(
+                                talk.getId(),
+                                talk.getTitle(),
+                                talk.getDescription(),
+                                talk.getStartTime()
+                        )).collect(Collectors.toList())
+        );
     }
 }
