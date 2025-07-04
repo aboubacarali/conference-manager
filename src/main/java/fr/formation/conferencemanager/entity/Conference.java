@@ -22,6 +22,6 @@ public class Conference {
     private LocalDate startDate;
     private LocalDate endDate;
     private String location;
-    @OneToMany
+    @OneToMany(mappedBy = "conference")
     private List<Talk> talks;
 }

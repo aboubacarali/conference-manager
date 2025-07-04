@@ -1,5 +1,6 @@
 package fr.formation.conferencemanager.controller;
 
+import fr.formation.conferencemanager.entity.Conference;
 import fr.formation.conferencemanager.entity.Speaker;
 import fr.formation.conferencemanager.service.AppService;
 import lombok.RequiredArgsConstructor;
@@ -18,5 +19,11 @@ public class AppController {
     @PostMapping("/speaker/{speakerId}/assign-talk/{talkId}")
     public ResponseEntity<Speaker> addSpeakerToTalk(@PathVariable Long speakerId, @PathVariable Long talkId) {
         return ResponseEntity.ok(appService.addSpeakerToTalk(speakerId, talkId));
+    }
+
+
+    @PostMapping("/conference/{conferenceId}/add-talk/{talkId}")
+    public ResponseEntity<Conference> addTalkToConference(@PathVariable Long conferenceId, @PathVariable Long talkId) {
+        return ResponseEntity.ok(appService.addTalkToConference(conferenceId, talkId));
     }
 }

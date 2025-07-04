@@ -21,6 +21,7 @@ public class Talk {
     private LocalDateTime startTime;
 //    private LocalDateTime endDate;
     @ManyToOne
+    @JsonBackReference
     private Conference conference;
     @ManyToOne
     @JsonBackReference

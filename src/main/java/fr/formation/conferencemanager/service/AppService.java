@@ -1,5 +1,6 @@
 package fr.formation.conferencemanager.service;
 
+import fr.formation.conferencemanager.entity.Conference;
 import fr.formation.conferencemanager.entity.Speaker;
 import fr.formation.conferencemanager.entity.Talk;
 import fr.formation.conferencemanager.repository.ConferenceRepository;
@@ -27,5 +28,17 @@ public class AppService {
         talkToAdd.get().setSpeaker(speakerToUpdate.get());
         talkRepository.save(talkToAdd.get());
         return speakerRepository.save(speakerToUpdate.get());
+    }
+
+    public Conference addTalkToConference(Long conferenceId, Long talkId) {
+        Optional<Conference> conferenceToUpdate = conferenceRepository.findById(conferenceId);
+        Optional<Talk> talkToAdd = talkRepository.findById(talkId);
+        if (conferenceToUpdate.isEmpty() || talkToAdd.isEmpty()) {
+            throw new RuntimeException("Conference or talk doesn't exist");
+        }
+        conferenceToUpdate.get().getTalks().add(talkToAdd.get());
+        talkToAdd.get().setConference(conferenceToUpdate.get());
+        talkRepository.save(talkToAdd.get());
+        return conferenceRepository.save(conferenceToUpdate.get());
     }
 }
